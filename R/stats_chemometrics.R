@@ -145,11 +145,11 @@ PlotPCAScree <- function(mSetObj=NA, imgName, format="png", dpi=72, width=NA, sc
   
   Cairo::Cairo(file = imgName, unit="in", dpi=dpi, width=w, height=h, type=format, bg="white");
   par(mar=c(5,5,6,3));
-  plot(pcvars, type='l', col='blue', main='Scree plot', xlab='PC index', ylab='Variance explained', ylim=c(miny, maxy), axes=F)
+  plot(pcvars, type='l', col="#1b7837", main='Scree plot', xlab='PC index', ylab='Variance explained', ylim=c(miny, maxy), axes=F)
   text(pcvars, labels =paste(100*round(pcvars,3),'%'), adj=c(-0.3, -0.5), srt=45, xpd=T)
   points(pcvars, col='red');
   
-  lines(cumvars, type='l', col='green')
+  lines(cumvars, type='l', col="#762a83")
   text(cumvars, labels =paste(100*round(cumvars,3),'%'), adj=c(-0.3, -0.5), srt=45, xpd=T)
   points(cumvars, col='red');
   
@@ -283,8 +283,8 @@ PlotPCA2DScore <- function(mSetObj=NA, imgName, format="png", dpi=72, width=NA, 
     legend("topright", legend = legend.nm, pch=uniq.pchs, col=uniq.cols);
   }else{
     plot(pc1, pc2, xlab=xlabel, ylab=ylabel, type='n', main="Scores Plot");
-    points(pc1, pc2, pch=15, col="magenta");
-    text(pc1, pc2, label=text.lbls, pos=4, col ="blue", xpd=T, cex=0.8);
+    points(pc1, pc2, pch=15, col="#1b7837");
+    text(pc1, pc2, label=text.lbls, pos=4, col ="#003c30", xpd=T, cex=0.8);
   }
   par(op);
   dev.off();
@@ -447,14 +447,14 @@ PlotPCALoading <- function(mSetObj=NA, imgName, format="png", dpi=72, width=NA, 
   
   mSetObj$pca.axis.lims <- par("usr"); # x1, x2, y1 ,y2
   grid(col = "lightgray", lty = "dotted", lwd = 1);
-  points(loadings[,1],loadings[,2], pch=19, col=adjustcolor("magenta", alpha.f = 0.4));
+  points(loadings[,1],loadings[,2], pch=19, col=adjustcolor("#1b7837", alpha.f = 0.4));
   
   if(plotType=="all"){
-    text(loadings[,1],loadings[,2], labels=substr(rownames(loadings), 1, 16), pos=4, col="blue", xpd=T);
+    text(loadings[,1],loadings[,2], labels=substr(rownames(loadings), 1, 16), pos=4, col="#003c30", xpd=T);
   }else if(plotType == "custom"){
     if(length(mSetObj$custom.cmpds) > 0){
       hit.inx <- colnames(mSetObj$dataSet$norm) %in% mSetObj$custom.cmpds;
-      text(loadings[hit.inx,1],loadings[hit.inx,2], labels=rownames(loadings)[hit.inx], pos=4, col="blue", xpd=T);
+      text(loadings[hit.inx,1],loadings[hit.inx,2], labels=rownames(loadings)[hit.inx], pos=4, col="#003c30", xpd=T);
     }
   }else{
     # do nothing
@@ -876,14 +876,14 @@ PlotPLSLoading <- function(mSetObj=NA, imgName, format="png", dpi=72, width=NA, 
   
   mSetObj$pls.axis.lims <- par("usr"); # x1, x2, y1 ,y2
   grid(col = "lightgray", lty = "dotted", lwd = 1);
-  points(loadings[,1],loadings[,2], pch=19, col=adjustcolor("magenta", alpha.f = 0.4));
+  points(loadings[,1],loadings[,2], pch=19, col=adjustcolor("#1b7837", alpha.f = 0.4));
   
   if(plotType=="all"){
-    text(loadings[,1],loadings[,2], labels=substr(rownames(loadings), 1, 16), pos=4, col="blue", xpd=T);
+    text(loadings[,1],loadings[,2], labels=substr(rownames(loadings), 1, 16), pos=4, col="#003c30", xpd=T);
   }else if(plotType == "custom"){
     if(length(mSetObj$custom.cmpds) > 0){
       hit.inx <- colnames(mSetObj$dataSet$norm) %in% mSetObj$custom.cmpds;
-      text(loadings[hit.inx,1],loadings[hit.inx,2], labels=rownames(loadings)[hit.inx], pos=4, col="blue", xpd=T);
+      text(loadings[hit.inx,1],loadings[hit.inx,2], labels=rownames(loadings)[hit.inx], pos=4, col="#003c30", xpd=T);
     }
   }else{
     # do nothing
@@ -1176,7 +1176,7 @@ PlotImpVar <- function(mSetObj=NA, imp.vec, xlbl, feat.num=15, color.BW=FALSE){
   names(imp.vec) <- NULL;
   
   # modified for B/W color
-  dotcolor <- ifelse(color.BW, "darkgrey", "blue");
+  dotcolor <- ifelse(color.BW, "darkgrey", "#003c30");
   dotchart(imp.vec, bg=dotcolor, xlab= xlbl, cex=1.3);
   
   mtext(side=2, at=1:feat.num, vip.nms, las=2, line=1)
@@ -1277,7 +1277,7 @@ PlotPLS.Classification <- function(mSetObj=NA, imgName, format="png", dpi=72, wi
   
   Cairo::Cairo(file = imgName, unit="in", dpi=dpi, width=w, height=h, type=format, bg="white");
   par(mar=c(5,5,2,7)); # put legend on the right outside
-  barplot(res, beside = TRUE, col = c("lightblue", "mistyrose","lightcyan"), ylim= c(0,1.05), xlab="Number of components", ylab="Performance");
+  barplot(res, beside = TRUE, col = c("lightblue", "#762a83","lightcyan"), ylim= c(0,1.05), xlab="Number of components", ylab="Performance");
   
   if(choice == "Q2"){
     text((best.num-1)*3 + best.num + 2.5, res[3,best.num]+ 0.02, labels = "*", cex=2.5, col="red");
@@ -1569,14 +1569,14 @@ PlotOPLS.Splot <- function(mSetObj=NA, imgName, plotType="all", format="png", dp
   par(mar=c(5,5,4,7))
   plot(p1, pcorr1, type="n", xlab="p[1]", ylab ="p(corr)[1]", main = "Feature Importance");
   grid(col="lightgrey", lty=3, lwd = 1);
-  points(p1, pcorr1, pch=19, col=adjustcolor("magenta", alpha.f = 0.4));
+  points(p1, pcorr1, pch=19, col=adjustcolor("#1b7837", alpha.f = 0.4));
   opls.axis.lims <- par("usr");
   if(plotType=="all"){
-    text(p1, pcorr1, labels=colnames(s), cex=0.8, pos=4, xpd=TRUE, col="blue");
+    text(p1, pcorr1, labels=colnames(s), cex=0.8, pos=4, xpd=TRUE, col="#003c30");
   }else if(plotType == "custom"){
     if(length(mSetObj$custom.cmpds) > 0){
       hit.inx <- colnames(mSetObj$dataSet$norm) %in% mSetObj$custom.cmpds;
-      text(p1[hit.inx], pcorr1[hit.inx], labels=colnames(s)[hit.inx], pos=4, xpd=TRUE, col="blue");
+      text(p1[hit.inx], pcorr1[hit.inx], labels=colnames(s)[hit.inx], pos=4, xpd=TRUE, col="#003c30");
     }
   }else{
     # do nothing
@@ -1649,11 +1649,11 @@ PlotOPLS.MDL <- function(mSetObj=NA, imgName, format="png", dpi=72, width=NA){
   mod.dat <- t(mod.dat);
   bplt <- barplot(mod.dat,beside=TRUE, names.arg = colnames(mod.dat),xlab = "");
   axis(2, lwd.ticks=1);
-  barplot(mod.dat,add = TRUE, beside = TRUE, col = c("lightblue", "mistyrose", "lavender"));
+  barplot(mod.dat,add = TRUE, beside = TRUE, col = c("lightblue", "#762a83", "lavender"));
   text(x=bplt, y=mod.dat+max(mod.dat)/25, labels=as.character(mod.dat), xpd=TRUE)
   xpos <- nrow(mod.dat)*ncol(mod.dat) + ncol(mod.dat) + 0.5
   ypos <- max(mod.dat)/2;
-  legend(xpos, ypos, legend = c("R2X", "R2Y", "Q2"), pch=15, col=c("lightblue", "mistyrose", "lavender"), xpd=T, bty="n");
+  legend(xpos, ypos, legend = c("R2X", "R2Y", "Q2"), pch=15, col=c("lightblue", "#762a83", "lavender"), xpd=T, bty="n");
   dev.off();
   
   write.csv(mod.dat, file="oplsda_model.csv");
@@ -1766,7 +1766,7 @@ PlotOPLS.Permutation<-function(mSetObj=NA, imgName, format="png", dpi=72, width=
   qbins <- seq(min(qhst$breaks),max(qhst$breaks),bin.size);
   hist(r.vec[-1], xlim=rng, ylim=c(0, h), breaks=rbins, border=F, ylab="Frequency", xlab= 'Permutations', 
        col=adjustcolor("lightblue", alpha=0.6), main="");
-  hist(q.vec[-1], add=TRUE,breaks=qbins, border=F, col=adjustcolor("mistyrose", alpha=0.6));
+  hist(q.vec[-1], add=TRUE,breaks=qbins, border=F, col=adjustcolor("#762a83", alpha=0.6));
   
   arrows(r.vec[1], h/3, r.vec[1], 0, length=0.1,angle=30,lwd=2);
   text(r.vec[1], h/2.5, paste('R2Y:', r.vec[1], "\n", pr), xpd=TRUE);
@@ -1774,7 +1774,7 @@ PlotOPLS.Permutation<-function(mSetObj=NA, imgName, format="png", dpi=72, width=
   arrows(q.vec[1], h/2, q.vec[1], 0, length=0.1,angle=30,lwd=2);
   text(q.vec[1], h/1.8, paste('Q2:', q.vec[1], "\n", pq), xpd=TRUE);
   
-  legend(1, h/3, legend = c("Perm R2Y", "Perm Q2"), pch=15, col=c("lightblue", "mistyrose"), xpd=T, bty="n");
+  legend(1, h/3, legend = c("Perm R2Y", "Perm Q2"), pch=15, col=c("lightblue", "#762a83"), xpd=T, bty="n");
   
   dev.off();
   
