@@ -150,9 +150,9 @@ PlotFC <- function(mSetObj=NA, imgName, format="png", dpi=72, width=NA){
     plot(NULL, xlim=xlim, ylim=ylim, xlab = GetVariableLabel(mSetObj$dataSet$type),
          ylab=paste("Count with FC >=", fc$max.thresh, "or <=", fc$min.thresh));
     for(i in 1:ncol(fc$fc.all)){
-      segments(i,0, i, fc$fc.all[1,i], col= ifelse(fc$inx.up[i],"magenta", "darkgrey"),
+      segments(i,0, i, fc$fc.all[1,i], col= ifelse(fc$inx.up[i],"#35978f", "darkgrey"),
                lwd= ifelse(fc$inx.up[i], 2, 1));
-      segments(i,0, i, -fc$fc.all[2,i], col= ifelse(fc$inx.down[i], "magenta", "darkgrey"),
+      segments(i,0, i, -fc$fc.all[2,i], col= ifelse(fc$inx.down[i], "#35978f", "darkgrey"),
                lwd= ifelse(fc$inx.down[i], 2, 1));
     }
     abline(h=fc$max.thresh, lty=3);
@@ -164,7 +164,7 @@ PlotFC <- function(mSetObj=NA, imgName, format="png", dpi=72, width=NA){
       topVal <- max(abs(fc$fc.log));
       ylim <- c(-topVal, topVal);
       plot(fc$fc.log,  ylab="Log2 (FC)", ylim = ylim, xlab = GetVariableLabel(mSetObj$dataSet$type), pch=19, axes=F,
-           col= ifelse(fc$inx.imp, "magenta", "darkgrey"));
+           col= ifelse(fc$inx.imp, "#35978f", "darkgrey"));
       axis(2);
       axis(4); # added by Beomsoo
       abline(h=log(fc$max.thresh,2), lty=3);
@@ -189,14 +189,14 @@ PlotFC <- function(mSetObj=NA, imgName, format="png", dpi=72, width=NA){
       
       ylims <- range(c(mns1, mns2, msd1.top, msd2.top, msd1.low, msd2.low));
       new.mns <- c(mns1, rep(NA, 5), mns2);
-      cols <- c(rep("magenta", length(mns1)), rep(NA, 5), rep("blue", length(mns2)));
+      cols <- c(rep("#35978f", length(mns1)), rep(NA, 5), rep("blue", length(mns2)));
       pchs <- c(rep(15, length(mns1)), rep(NA, 5), rep(19, length(mns2)));
       plot(new.mns, ylim=ylims, pch = pchs, col = cols, cex = 1.25, axes=F, ylab="");
       axis(2);
       axis(4); # added by Beomsoo
-      abline(h=mn1, col="magenta", lty=3, lwd=2);
-      abline(h=msd1.low, col="magenta", lty=3, lwd=1);
-      abline(h=msd1.top, col="magenta", lty=3, lwd=1);
+      abline(h=mn1, col="#35978f", lty=3, lwd=2);
+      abline(h=msd1.low, col="#35978f", lty=3, lwd=1);
+      abline(h=msd1.top, col="#35978f", lty=3, lwd=1);
       abline(h=mn2, col="blue", lty=3, lwd=2);
       abline(h=msd2.low, col="blue", lty=3, lwd=1);
       abline(h=msd2.top, col="blue", lty=3, lwd=1);
